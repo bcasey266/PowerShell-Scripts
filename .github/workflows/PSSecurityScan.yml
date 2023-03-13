@@ -1,12 +1,12 @@
-name: Powershell Automation
+name: Powershell Security Scan
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  lint:
-    name: DevSkim
+  PSScan:
+    name: PSScan
     runs-on: ubuntu-20.04
     permissions:
       actions: read
@@ -21,7 +21,7 @@ jobs:
         with:
           output-filename: devskim-results.sarif
           output-directory: scans
-        
+
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@6b2948b1944407914a58661c49941824d149734f
         with:
