@@ -8,9 +8,6 @@ jobs:
   DocCreate:
     name: DocCreate
     runs-on: windows-latest
-    permissions:
-      actions: read
-      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

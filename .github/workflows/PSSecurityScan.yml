@@ -30,7 +30,7 @@ jobs:
         with:
           path: .\
           recurse: true
-          output: scans/results.sarif
+          output: scans/PSScriptAnalyzer-results.sarif
 
       - name: Upload DevSkim scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
