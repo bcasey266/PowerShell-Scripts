@@ -1,8 +1,6 @@
 name: Powershell Documentation Creation
 
 on:
-  push:
-    branches: ["Get-RGCreationDate"]
   pull_request:
     branches: ["main"]
 
@@ -15,12 +13,14 @@ jobs:
       contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout ${{ github.event.pull_request.number }}
 
       - name: Create Documentation
         run: .\.github\workflows\PSDocumentationCreate.ps1
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: Azure/
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push
