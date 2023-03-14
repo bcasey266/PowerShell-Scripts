@@ -18,6 +18,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create Documentation
-        run: |
-          cd .github/workflows
-          pwd
+        run: .github/workflows/PSDocumentation.ps1
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: /
