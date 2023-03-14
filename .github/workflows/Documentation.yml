@@ -29,9 +29,3 @@ jobs:
           git add .
           git commit -a -m "Automated Documentation Update"
           git push
-
-      - name: Upload Repo
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: Azure/
