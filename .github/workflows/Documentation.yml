@@ -1,0 +1,31 @@
+name: Powershell Documentation Creation
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  DocCreate:
+    name: DocCreate
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Checkout code
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout ${{ github.event.pull_request.number }}
+
+      - name: Create Documentation
+        run: .\.github\workflows\PSDocumentationCreate.ps1
+
+      - name: Commit Documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "DocAutomation@thebeardcode.com"
+          git config --global user.name "GitHub Actions Doc Automation"
+          git add .
+          git commit -a -m "Automated Documentation Update"
+          git push
