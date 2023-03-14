@@ -20,14 +20,12 @@ jobs:
       - name: Create Documentation
         run: .\.github\workflows\PSDocumentationCreate.ps1
 
-      - name: Current Directory Test
-        run: |
-          pwd
-
       - name: Commit Documentation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global user.email "DocAutomation@thebeardcode.com"
+          git config --global user.name "GitHub Actions Doc Automation"
           git add .
           git commit -a -m "Automated Documentation Update"
           git push
@@ -36,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: Scripts/
+          path: Azure/
