@@ -3,6 +3,8 @@ name: Powershell Security Scan
 on:
   pull_request:
     branches: ["main"]
+  push:
+    branches: ["Get-RGCreationDate"]
 
 jobs:
   PSScan:
@@ -16,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Create Folder
+        run: mkdir scans
+
       - name: Run DevSkim scanner
         uses: microsoft/DevSkim-Action@v1
         with:
@@ -23,7 +28,7 @@ jobs:
           output-directory: scans
 
       - name: Run PSScriptAnalyzer
-        uses: microsoft/psscriptanalyzer-action@6b2948b1944407914a58661c49941824d149734f
+        uses: microsoft/psscriptanalyzer-action@v1.0
         with:
           path: .\
           recurse: true
