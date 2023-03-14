@@ -20,6 +20,9 @@ jobs:
       - name: Create Documentation
         run: .\.github\workflows\PSDocumentationCreate.ps1
 
+      - name: Add Git Changes
+        run: git add .
+
       - name: Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
