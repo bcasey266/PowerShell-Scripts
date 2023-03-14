@@ -3,7 +3,7 @@ $InformationPreference = 'Continue'
 Install-Module platyps -Force
 Import-Module platyps
 
-$PowershellFiles = Get-ChildItem *.ps1 -Recurse
+$PowershellFiles = Get-ChildItem *.ps1 -Recurse  -Exclude PSDocumentationCreate.ps1
 
 foreach ($PowershellFile in $PowershellFiles) {
     Set-Location $PowershellFile.Directory.FullName
